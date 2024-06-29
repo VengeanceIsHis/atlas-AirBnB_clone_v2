@@ -20,7 +20,8 @@ class BaseModel:
             kwargs['updated_at'] = datetime.strptime(updated_at, '%Y-%m-%dT%H:%M:%S.%f')
             kwargs['created_at'] = datetime.strptime(created_at, '%Y-%m-%dT%H:%M:%S.%f')
 
-            del kwargs['__Class__']
+            if '__Class__' in kwargs:
+                del kwargs['__Class__']
 
             self.__dict__.update(kwargs)
 
