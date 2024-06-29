@@ -15,10 +15,10 @@ class BaseModel:
             self.updated_at = datetime.now()
             storage.new(self)
         else:
-            updated_at = str(kwargs['updated_at'])
-            created_at = str(kwargs['created_at'])
-            kwargs['updated_at'] = datetime.strptime(updated_at, '%Y-%m-%dT%H:%M:%S.%f')
-            kwargs['created_at'] = datetime.strptime(created_at, '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['updated_at'] = str(kwargs['updated_at'])
+            kwargs['created_at'] = str(kwargs['created_at'])
+            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['created_at'] = datetime.strptime(kwargs['created_at'], '%Y-%m-%dT%H:%M:%S.%f')
 
             if '__Class__' in kwargs:
                 del kwargs['__Class__']
