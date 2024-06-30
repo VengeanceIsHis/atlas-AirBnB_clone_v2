@@ -57,3 +57,8 @@ class DBStorage:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj
         return new_dict
+
+    def new(self, obj):
+        """Add a new objet to the current DB"""
+        self.__session.add(obj)
+
