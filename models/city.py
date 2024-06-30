@@ -2,7 +2,7 @@
 """ City Module for HBNB project """
 from models.base_model import BaseModel
 import uuid
-
+from datetime import datetime
 class City(BaseModel):
     """ The city class, contains state ID and name """
     def __init__(self, **kwargs):
