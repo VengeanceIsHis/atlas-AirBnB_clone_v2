@@ -20,6 +20,7 @@ class Place(BaseModel):
     def to_dict(self):
         """Convert instance into dict format"""
         dictionary = {
+            '__class__': type(self).__name__,
             'id': self.id,
             'city_id': self.city_id,
             'user_id': self.user_id,
