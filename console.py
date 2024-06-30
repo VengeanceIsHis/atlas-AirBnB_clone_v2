@@ -143,8 +143,6 @@ class HBNBCommand(cmd.Cmd):
                 value = int(value)
             kwargs[key] = value
 
-        new_instance = HBNBCommand.classes[class_name](**kwargs)
-        print(new_instance.id)
         if 'updated_at' not in kwargs:
             kwargs['updated_at'] = datetime.now().strftime(
                 '%Y-%m-%dT%H:%M:%S.%f'
@@ -153,6 +151,10 @@ class HBNBCommand(cmd.Cmd):
             kwargs['created_at'] = datetime.now().strftime(
                 '%Y-%m-%dT%H:%M:%S.%f'
                 )
+
+        new_instance = HBNBCommand.classes[class_name](**kwargs)
+        print(new_instance.id)
+        
         storage.save()
 
     def help_create(self):
