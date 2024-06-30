@@ -19,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
+    HBNBCommand.classes = {
                'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
                'Review': Review
@@ -143,6 +143,9 @@ class HBNBCommand(cmd.Cmd):
                 value = int(value)
             kwargs[key] = value
 
+
+        new_instance = self.classes[class_name](**kwargs)
+
         if 'updated_at' not in kwargs:
             kwargs['updated_at'] = datetime.now().strftime(
                 '%Y-%m-%dT%H:%M:%S.%f'
@@ -152,9 +155,8 @@ class HBNBCommand(cmd.Cmd):
                 '%Y-%m-%dT%H:%M:%S.%f'
                 )
 
-        new_instance = HBNBCommand.classes[class_name](**kwargs)
         print(new_instance.id)
-        
+
         storage.save()
 
     def help_create(self):
