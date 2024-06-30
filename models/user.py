@@ -16,6 +16,7 @@ class User(BaseModel):
 
     def to_dict(self):
         dictionary = {
+            '__class__': type(self).__name__,
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,

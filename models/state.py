@@ -14,6 +14,7 @@ class State(BaseModel):
     def to_dict(self):
         """Convert instance into dict format"""
         dictionary = {
+            '__class__': type(self).__name__,
             'id': self.id,
             'name': self.name,
             'created_at': self.created_at,

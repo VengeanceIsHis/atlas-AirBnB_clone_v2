@@ -14,6 +14,7 @@ class City(BaseModel):
 
     def to_dict(self):
         dictionary = {
+            '__class__': type(self).__name__,
             'id': self.id,
             'name': self.name,
             'state_id': self.state_id,
