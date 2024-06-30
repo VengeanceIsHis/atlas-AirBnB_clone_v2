@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+
+
 from models.base_model import BaseModel
 import uuid
 from datetime import datetime
+
+
 class State(BaseModel):
     """ State class """
     def __init__(self, **kwargs):

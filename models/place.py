@@ -17,6 +17,7 @@ class Place(BaseModel):
         self.price_by_night = kwargs.get('price_by_night')
         self.latitude = kwargs.get('latitude')
         self.longitude = kwargs.get('longitude', None)
+
     def to_dict(self):
         """Convert instance into dict format"""
         dictionary = {
