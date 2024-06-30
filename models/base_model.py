@@ -48,7 +48,8 @@ class BaseModel:
             '__class__': self.__class__.__name__,
             }
         for key, value in self.__dict__.items():
-            if key not in ['id', 'created_at', 'updated_at', '_sa_instance_state']:
+            if key not in ['id', 'created_at',
+                           'updated_at','_sa_instance_state']:
                 dictionary[key] = value
         return dictionary
 
