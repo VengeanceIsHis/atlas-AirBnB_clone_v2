@@ -70,3 +70,10 @@ class DBStorage:
         """Delete an object from the current DB if it exists"""
         if obj is not None:
             self.__session.delete(obj)
+
+    def reload(self):
+        """Creating tables in the DB and initializing the session"""
+        Base.metadata.create_all(self.__engine)
+        sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        self.__session = scoped_session(sess_factory)
+
