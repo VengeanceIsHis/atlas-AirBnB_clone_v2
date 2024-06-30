@@ -11,3 +11,13 @@ class City(BaseModel):
         self.state_id = kwargs.get('state_id', None)
         self.created_at = str(datetime.now())
         self.updated_at = str(datetime.now())
+
+    def to_dict(self):
+        dictionary = {
+            'id': self.id,
+            'name': self.name,
+            'state_id': self.state_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+        return dictionary
