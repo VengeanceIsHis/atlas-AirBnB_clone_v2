@@ -7,4 +7,3 @@ class State(BaseModel):
     """ State class """
     def __init__(self):
         self.id = str(uuid.uuid4())
-    name = ""
