@@ -45,9 +45,10 @@ class BaseModel:
             'id': self.id,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
-        }
+            '__class__': self.__class__.__name__,
+            }
         for key, value in self.__dict__.items():
-            if key not in ['_sa_instance_state']:
+            if key not in ['id', 'created_at', 'updated_at', '_sa_instance_state']:
                 dictionary[key] = value
         return dictionary
 
