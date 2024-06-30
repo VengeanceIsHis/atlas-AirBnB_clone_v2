@@ -137,7 +137,7 @@ class HBNBCommand(cmd.Cmd):
                 value = value.replace('\\\"', '"')
                 value = value.replace('_', ' ')
 
-            if '.' in value:
+            if '.' in value and not any(char.isalpha() for char in value):
                 value = float(value)
             elif value.isdigit():
                 value = int(value)
