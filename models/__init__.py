@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""This module instantiates an object of class FileStorage"""
+"""This module initializes the storage based on the environment
+variable HBNB_TYPE_STORAGE"""
 
 
 from models.engine.file_storage import FileStorage
