@@ -15,8 +15,8 @@ class State(BaseModel):
         dictionary = {
             'id': self.id,
             'name': self.name,
-            'created_at': self.created_at.isoformat(),
-            'updated_at': self.updated_at.isoformat(),
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
             '__class__': type(self).__name__
         }
         return dictionary
