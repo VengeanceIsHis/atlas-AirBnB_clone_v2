@@ -19,13 +19,13 @@ class BaseModel:
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
-        """Instatntiates a new model"""
+        """Instantiates a new model"""
         self.id = kwargs.get('id', str(uuid.uuid4()))
         self.created_at = kwargs.get('created_at', datetime.utcnow())
         self.updated_at = kwargs.get('updated_at', self.created_at)
 
         for key, value in kwargs.items():
-            if key != 'id' and key != 'created_at' and key != 'updated_at':
+            if key not in ['id', 'created_at', 'updated_at', '__class__']:
                 setattr(self, key, value)
 
     def __str__(self):
@@ -41,11 +41,14 @@ class BaseModel:
 
     def to_dict(self):
         """Convert instance into dict format"""
-        dictionary = self.__dict__.copy()
-        dictionary['__class__'] = type(self).__name__
-        dictionary['created_at'] = self.created_at.isoformat()
-        dictionary['updated_at'] = self.updated_at.isoformat()
-        dictionary.pop("_sa_instance_state", None)
+        dictionary = {
+            'id': self.id,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
+        }
+        for key, value in self.__dict__.items():
+            if key not in ['_sa_instance_state']:
+                dictionary[key] = value
         return dictionary
 
     def delete(self):
