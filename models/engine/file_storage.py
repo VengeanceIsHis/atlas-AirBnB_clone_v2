@@ -65,5 +65,6 @@ class FileStorage:
             key_to_delete = "{}.{}".format(type(obj).__name__, obj.id)
             if key_to_delete in FileStorage.__objects:
                 del FileStorage.__objects[key_to_delete]
-                # Optionally, you might want to save the changes to your file here
+                # Optionally, you might want to save the changes to 
+                # your file here
                 self.save()
