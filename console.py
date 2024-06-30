@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
             kwargs[key] = value
 
 
-        new_instance = HBNBCommand.classes[class_name](**kwargs)
+        new_instance = self.classes[class_name](**kwargs)
 
         if 'updated_at' not in kwargs:
             kwargs['updated_at'] = datetime.now().strftime(
