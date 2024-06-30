@@ -5,7 +5,6 @@ import uuid
 
 class City(BaseModel):
     """ The city class, contains state ID and name """
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.id = str(uuid.uuid4())
-    state_id = ""
-    name = ""
+        self.state_id = kwargs.get('state_id', None)
