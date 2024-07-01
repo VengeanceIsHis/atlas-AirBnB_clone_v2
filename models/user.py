@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 
-
-from models.base_model import BaseModel
+from sqlalchemy import Column, Integer, String
+from models.base_model import BaseModel, Base
 import uuid
 from datetime import datetime
 
@@ -17,6 +17,13 @@ class User(BaseModel):
         self.email = kwargs.get('email', None)
         self.created_at = str(datetime.now())
         self.updated_at = str(datetime.now())
+
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String(50), unique=True)
+    email = Column(String(120), unique=True)
+    password = Column(String(120))
 
     def to_dict(self):
         dictionary = {
