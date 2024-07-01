@@ -4,18 +4,12 @@
 
 import uuid
 from datetime import datetime
-<<<<<<< HEAD
-import sqlalchemy
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String
-=======
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import models
 
 
 Base = declarative_base()
->>>>>>> d64cd52eebf79d1ad01ddea67c0c5520fb583fb7
 
 
 Base = declarative_base()
