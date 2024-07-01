@@ -143,7 +143,6 @@ class HBNBCommand(cmd.Cmd):
                 value = int(value)
             kwargs[key] = value
 
-
         new_instance = self.classes[class_name](**kwargs)
 
         if 'updated_at' not in kwargs:

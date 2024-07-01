@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 """This module defines a class User"""
+
+
 from models.base_model import BaseModel
 import uuid
 from datetime import datetime
+
+
 class User(BaseModel):
     """This class defines a user by various attributes"""
     def __init__(self, **kwargs):
