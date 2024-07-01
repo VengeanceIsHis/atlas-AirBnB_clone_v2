@@ -3,8 +3,8 @@
 variable HBNB_TYPE_STORAGE"""
 
 
-from models.engine.file_storage import FileStorage
 import os
+
 
 storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
 
@@ -14,5 +14,4 @@ if storage_selection == 'db':
 else:
     from models.engine.file_storage import FileStorage
     storage = FileStorage()
-
 storage.reload()

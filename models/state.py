@@ -15,10 +15,10 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
 
-    if models.storage_type == 'db':
+    if models.storage_selection == 'db':
         cities = relationship("City", cascade="all, delete", backref="state")
 
-    if models.storage_type == 'file':
+    if models.storage_selection == 'file':
         @property
         def cities(self):
             from models import storage
