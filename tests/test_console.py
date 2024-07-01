@@ -20,6 +20,16 @@ class TestHBNBCommand(unittest.TestCase):
     def test_prompt(self):
         self.assertEqual(self.console.prompt, '(hbnb) ')
 
+    def test_create_state(self):
+        """Test creating a new State"""
+        new_state = State(name="California")
+        new_state.save()
+        self.storage.save()
+
+        key = "State.{}".format(new_state.id)
+        self.assertIn(key, self.storage.all())
+        self.assertEqual(self.storage.all()[key].name, "California")
+
 
 if __name__ == "__main__":
     unittest.main()

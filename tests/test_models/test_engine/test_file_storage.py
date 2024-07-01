@@ -107,13 +107,3 @@ class test_fileStorage(unittest.TestCase):
         from models.engine.file_storage import FileStorage
         print(type(storage))
         self.assertEqual(type(storage), FileStorage)
-
-    def test_create_state(self):
-        """Test creating a new State"""
-        new_state = State(name="California")
-        new_state.save()
-        self.storage.save()
-
-        key = "State.{}".format(new_state.id)
-        self.assertIn(key, self.storage.all())
-        self.assertEqual(self.storage.all()[key].name, "California")
