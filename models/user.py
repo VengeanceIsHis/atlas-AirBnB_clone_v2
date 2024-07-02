@@ -1,13 +1,16 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 
+
 from sqlalchemy import Column, Integer, String
 from models.base_model import BaseModel, Base
 import uuid
 from datetime import datetime
+from sqlalchemy.orm import relationship
+import sqlalchemy
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     def __init__(self, **kwargs):
         self.id = str(uuid.uuid4())
@@ -19,11 +22,11 @@ class User(BaseModel):
         self.updated_at = str(datetime.now())
 
     __tablename__ = 'users'
-
-    id = Column(Integer, primary_key=True)
-    username = Column(String(50), unique=True)
-    email = Column(String(120), unique=True)
-    password = Column(String(120))
+    email = Column(String(128), unique=True)
+    password = Column(String(128))
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
+    places = relationship("Place", backref="user")
 
     def to_dict(self):
         dictionary = {

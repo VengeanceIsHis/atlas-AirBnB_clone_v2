@@ -2,12 +2,28 @@
 """ Place Module for HBNB project """
 
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import uuid
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+import sqlalchemy
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """ A place to stay """
+    __tablename__ = 'places'
+
+    city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    name = Column(String(128), nullable=False)
+    description = Column(String(1024))
+    number_rooms = Column(Integer, default=0, nullable=False)
+    number_bathrooms = Column(Integer, default=0, nullable=False)
+    max_guest = Column(Integer, default=0, nullable=False)
+    price_by_night = Column(Integer, default=0, nullable=False)
+    latitude = Column(Float)
+    longitude = Column(Float)
+
     def __init__(self, **kwargs):
         self.id = str(uuid.uuid4())
         self.city_id = kwargs.get('city_id', None)
