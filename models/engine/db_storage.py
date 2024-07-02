@@ -12,6 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
+from models import storage
 
 
 class DBStorage:
@@ -36,6 +37,8 @@ class DBStorage:
 
         if HBNB_ENV == "test":
             Base.metadata.drop_all(self.__engine)
+
+        self._FileStorage__objects = storage.all
 
         self.reload()
 
