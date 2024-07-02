@@ -4,6 +4,8 @@
 
 from models.base_model import BaseModel, Base
 import uuid
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey
 
 
 class Review(BaseModel, Base):
