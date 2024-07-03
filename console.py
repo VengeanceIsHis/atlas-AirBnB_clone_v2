@@ -156,6 +156,7 @@ class HBNBCommand(cmd.Cmd):
         storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
 
         if storage_selection == 'db':
+            storage.new()
             storage.save()
         else:
             print(new_instance.id)
