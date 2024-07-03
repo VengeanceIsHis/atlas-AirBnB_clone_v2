@@ -297,6 +297,9 @@ class HBNBCommand(cmd.Cmd):
                 storage.reload()
                 file_data = storage.all(class_name)
                 print(file_data)
+                for key, obj in file_data.items():
+                    obj_dict = obj.to_dict()
+                    print(f"Class: {class_name}, Name: {obj_dict['name']}, ID: {obj_dict['id']}")
     def help_all(self):
         """ Help information for the all command """
         print("Shows all objects, or all of a class")
