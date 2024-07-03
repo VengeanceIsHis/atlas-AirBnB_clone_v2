@@ -19,18 +19,6 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
-    def __init__(self):
-        host = os.getenv('HBNB_MYSQL_HOST')
-        user = os.getenv('HBNB_MYSQL_USER')
-        password = os.getenv('HBNB_MYSQL_PWD')
-        database = os.getenv('HBNB_MYSQL_DB')
-        self.conn = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-        self.cursor = self.conn.cursor()
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
