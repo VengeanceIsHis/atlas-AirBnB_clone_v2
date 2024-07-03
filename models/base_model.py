@@ -23,6 +23,7 @@ class BaseModel:
         self.id = kwargs.get('id', str(uuid.uuid4()))
         self.created_at = kwargs.get('created_at', datetime.utcnow())
         self.updated_at = kwargs.get('updated_at', self.created_at)
+        self.name = kwargs.get('name', None)
 
         for key, value in kwargs.items():
             if key not in ['id', 'created_at', 'updated_at', '__class__']:
