@@ -3,7 +3,7 @@
 
 
 import os
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from models.user import User
@@ -82,3 +82,19 @@ class DBStorage:
     def close(self):
         """Remove the current session and closing it"""
         self.__session.remove()
+
+    def table_dict(self, table_name):
+        table_dict = {}
+        inspector = inspect(self.__engine)
+
+        # Check if the table exists
+        if table_name in inspector.get_table_names():
+            sql_class = Base.metadata.tables[table_name]
+            objs = self.__session.query(sql_class).all()
+            for obj in objs:
+                key = obj.__class__.__name__ + '.' + obj.id
+                table_dict[key] = obj.__dict__
+        else:
+            print(f"Table '{table_name}' does not exist.")
+
+        return table_dict

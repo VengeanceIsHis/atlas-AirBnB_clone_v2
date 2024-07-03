@@ -16,14 +16,41 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
-    # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
+               'BaseModel': BaseModel, 
+    'User': {
+        'model_class': User,
+        'table_name': 'users',
+        'description': 'Represents a user',
+    },
+    'Place': {
+        'model_class': Place,
+        'table_name': 'places',
+        'description': 'Represents a place',
+    },
+    'State': {
+        'model_class': State,
+        'table_name': 'states', 
+        'description': 'Represents a state',
+    },
+    'City': {
+        'model_class': City,
+        'table_name': 'cities',
+        'description': 'Represents a city',
+    },
+    'Amenity': {
+        'model_class': Amenity,
+        'table_name': 'amenities',
+        'description': 'Represents an amenity',
+    },
+    'Review': {
+        'model_class': Review,
+        'table_name': 'reviews',
+        'description': 'Represents a review',
+    },
+}
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
              'number_rooms': int, 'number_bathrooms': int,
@@ -258,8 +285,6 @@ class HBNBCommand(cmd.Cmd):
             for key, obj in all_data.items():
                 print_list.append(str(obj))
                 print_dict[args_list[0]] = print_list
-
-            
 
     def help_all(self):
         """ Help information for the all command """
