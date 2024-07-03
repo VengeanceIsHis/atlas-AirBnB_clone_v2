@@ -251,7 +251,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
                     return
 
-                for key, obj in storage.FileStorage__objects.items():
+                for key, obj in storage._FileStorage__objects.items():
                     if key.split('.')[0] == args:
                         print_list.append(str(obj))
 
