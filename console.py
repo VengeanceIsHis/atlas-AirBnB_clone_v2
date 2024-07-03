@@ -19,6 +19,17 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
+    'BaseModel': BaseModel,
+    'User': User,
+    'Place': Place,
+    'State': State,
+    'City': City,
+    'Amenity': Amenity,
+    'Review': Review
+}
+
+
+    sqlclasses = {
                'BaseModel': BaseModel, 
     'User': {
         'model_class': User,
@@ -280,7 +291,7 @@ class HBNBCommand(cmd.Cmd):
                     return print_dict
             storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
             if storage_selection == 'db':
-                table_name = self.classes[class_name]['table_name']
+                table_name = self.sqlclasses[class_name]['table_name']
                 print(storage.table_dict(table_name))
             else:
                 storage.reload()
