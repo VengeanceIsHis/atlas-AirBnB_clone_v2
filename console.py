@@ -3,6 +3,7 @@
 import cmd
 import os
 from datetime import datetime
+import mysql.connector
 import sys
 from models.base_model import BaseModel
 from models.__init__ import storage
@@ -18,6 +19,18 @@ class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
 
     # determines prompt for interactive/non-interactive modes
+    def __init__(self):
+        host = os.getenv('HBNB_MYSQL_HOST')
+        user = os.getenv('HBNB_MYSQL_USER')
+        password = os.getenv('HBNB_MYSQL_PWD')
+        database = os.getenv('HBNB_MYSQL_DB')
+        self.conn = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        self.cursor = self.conn.cursor()
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
     classes = {
@@ -154,6 +167,23 @@ class HBNBCommand(cmd.Cmd):
             kwargs['created_at'] = datetime.now().strftime(
                 '%Y-%m-%dT%H:%M:%S.%f'
                 )
+        storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
+
+        if storage_selection == 'db':
+            insert_query = f"""
+        INSERT INTO {class_name.lower()} (id, name, created_at, updated_at)
+        VALUES (%s, %s, %s, %s)
+    """
+            insert_data = (new_instance.id, new_instance.name, new_instance.created_at, new_instance.updated_at)
+
+            try:
+                self.cursor.execute(insert_query, insert_data)
+                self.conn.commit()
+                print(f"Data inserted into {class_name.lower()} table successfully")
+            except mysql.connector.Error as e:
+                print(f"Error inserting data into {class_name.lower()} table: {e}")
+
+            
 
         print(new_instance.id)
         storage.new(new_instance)
