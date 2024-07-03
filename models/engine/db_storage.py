@@ -85,15 +85,22 @@ class DBStorage:
 
     def table_dict(self, table_name):
         table_dict = {}
-        inspector = inspect(self.__engine)
 
-        # Check if the table exists
+        inspector = inspect(self.__engine)
         if table_name in inspector.get_table_names():
-            sql_class = Base.metadata.tables[table_name]
-            objs = self.__session.query(sql_class).all()
+            table = Base.metadata.tables[table_name]
+
+            objs = self.__session.query(table).all()
+
             for obj in objs:
-                key = obj.__class__.__name__ + '.' + obj.id
-                table_dict[key] = obj.__dict__
+                obj_dict = {}
+                for column in table.columns:
+                    obj_dict[column.name] = getattr(obj, column.name)
+                
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                
+                table_dict[key] = obj_dict
+
         else:
             print(f"Table '{table_name}' does not exist.")
 
