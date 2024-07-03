@@ -17,20 +17,6 @@ from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
-    def __init__(self):
-        host = os.getenv('HBNB_MYSQL_HOST')
-        user = os.getenv('HBNB_MYSQL_USER')
-        password = os.getenv('HBNB_MYSQL_PWD')
-        database = os.getenv('HBNB_MYSQL_DB')
-        self.conn = mysql.connector.connect(
-            host=host,
-            user=user,
-            password=password,
-            database=database
-        )
-        self.cursor = self.conn.cursor()
-        self.completekey = 'tab'
-        self.cmdqueue = []
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
@@ -171,24 +157,11 @@ class HBNBCommand(cmd.Cmd):
         storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
 
         if storage_selection == 'db':
-            insert_query = f"""
-        INSERT INTO {class_name.lower()} (id, name, created_at, updated_at)
-        VALUES (%s, %s, %s, %s)
-    """
-            insert_data = (new_instance.id, new_instance.name, new_instance.created_at, new_instance.updated_at)
-
-            try:
-                self.cursor.execute(insert_query, insert_data)
-                self.conn.commit()
-                print(f"Data inserted into {class_name.lower()} table successfully")
-            except mysql.connector.Error as e:
-                print(f"Error inserting data into {class_name.lower()} table: {e}")
-
-            
-
-        print(new_instance.id)
-        storage.new(new_instance)
-        storage.save()
+            storage.save()
+        else:
+            print(new_instance.id)
+            storage.new(new_instance)
+            storage.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -219,7 +192,12 @@ class HBNBCommand(cmd.Cmd):
 
         key = c_name + "." + c_id
         try:
-            print(storage._FileStorage__objects[key])
+            storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
+            if storage_selection == 'db':
+                dbstorage = storage.reload()
+                print(dbstorage)
+            else:
+                print(storage._FileStorage__objects[key])
         except KeyError:
             print("** no instance found **")
 
