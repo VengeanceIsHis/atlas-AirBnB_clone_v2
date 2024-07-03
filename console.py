@@ -3,7 +3,6 @@
 import cmd
 import os
 from datetime import datetime
-import mysql.connector
 import sys
 from models.base_model import BaseModel
 from models.__init__ import storage
