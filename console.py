@@ -155,7 +155,6 @@ class HBNBCommand(cmd.Cmd):
                 )
 
         print(new_instance.id)
-
         storage.new(new_instance)
         storage.save()
 
@@ -233,8 +232,12 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
+        
 
         if args:
+            storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
+            if storage_selection == 'db':
+                storage.all()
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
