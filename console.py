@@ -29,6 +29,7 @@ class HBNBCommand(cmd.Cmd):
             database=database
         )
         self.cursor = self.conn.cursor()
+        self.completekey = 'tab'
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
