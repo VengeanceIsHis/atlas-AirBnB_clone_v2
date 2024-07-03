@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import os
 from datetime import datetime
 import sys
 from models.base_model import BaseModel
