@@ -156,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
         storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
 
         if storage_selection == 'db':
-            storage.new()
+            storage.new(self)
             storage.save()
             storage.reload()
         else:
