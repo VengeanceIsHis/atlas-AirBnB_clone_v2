@@ -158,6 +158,7 @@ class HBNBCommand(cmd.Cmd):
         if storage_selection == 'db':
             storage.new()
             storage.save()
+            storage.reload()
         else:
             print(new_instance.id)
             storage.new(new_instance)
