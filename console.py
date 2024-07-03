@@ -258,7 +258,7 @@ class HBNBCommand(cmd.Cmd):
                     if key.split('.')[0] == args:
                         print_list.append(str(obj))
                 print_dict[args] = print_list
-        return print_dict
+        print(print_dict)
 
     def help_all(self):
         """ Help information for the all command """
