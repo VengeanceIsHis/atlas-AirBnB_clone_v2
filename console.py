@@ -282,6 +282,9 @@ class HBNBCommand(cmd.Cmd):
             if storage_selection == 'db':
                 table_name = self.classes[class_name]['table_name']
                 print(storage.table_dict(table_name))
+            else:
+                file_data = storage.reload()
+                print(file_data)
 
     def help_all(self):
         """ Help information for the all command """
