@@ -272,19 +272,16 @@ class HBNBCommand(cmd.Cmd):
         print_dict = {}
 
         if args:
-            storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
-            if storage_selection == 'db':
-                printstorage = storage.reload()
-                print(printstorage)
             args_list = args.split()
+            class_name = args_list[0]
+            
             if args_list[0] not in HBNBCommand.classes:
                     print("** class doesn't exist **")
                     return print_dict
-            all_data = storage.all(args_list[0])
-            print_list = []
-            for key, obj in all_data.items():
-                print_list.append(str(obj))
-                print_dict[args_list[0]] = print_list
+            storage_selection = os.getenv('HBNB_TYPE_STORAGE', 'file')
+            if storage_selection == 'db':
+                table_name = self.classes[class_name]['table_name']
+                print(storage.table_dict(table_name))
 
     def help_all(self):
         """ Help information for the all command """
